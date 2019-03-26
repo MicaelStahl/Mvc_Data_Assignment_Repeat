@@ -1,4 +1,4 @@
-﻿@model Mvc_Data_Assignment_Repeat.Models.Person
+﻿@model Mvc_Data_Assignment_Repeat.ViewModels.PersonViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -35,9 +35,9 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.personList != null)
+        @if (Model.PersonList != null)
         {
-            @foreach (Person item in Model.personList)
+            @foreach (Person item in Model.PersonList)
             {
                 <tr>
                     <td>@item.Id</td>

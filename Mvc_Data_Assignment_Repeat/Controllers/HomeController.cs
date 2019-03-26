@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Mvc_Data_Assignment_Repeat.Models;
+using Mvc_Data_Assignment_Repeat.ViewModels;
 
 namespace Mvc_Data_Assignment_Repeat.Controllers
 {
@@ -22,20 +23,20 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
 
         public IActionResult Index()
         {
-            Person person = new Person();
-
+            PersonViewModel pvm = new PersonViewModel();
+            
             string filter = HttpContext.Session.GetString("_Filtered");
 
             if (filter != null)
             {
                 HttpContext.Session.Remove("_Filtered");
-                person.personList = _person.FilterList(filter);
+                pvm.PersonList = _person.FilterList(filter);
             }
             else
             {
-                person.personList = _person.AllPeople();
+                pvm.PersonList = _person.AllPeople();
             }
-            return View(person);
+            return View(pvm);
         }
 
         public IActionResult Create(int Id, Person person)

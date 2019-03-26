@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mvc_Data_Assignment_Repeat.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,23 +8,24 @@ namespace Mvc_Data_Assignment_Repeat.Models
 {
     public class PeopleList : IPerson
     {
-        public List<Person> personList = new List<Person>();
+        //public List<Person> personList = new List<Person>();
+        PersonViewModel pvm = new PersonViewModel();
 
         private int idCount = 1;
 
         public PeopleList()
         {
-            personList.Add(new Person() { Id = 0, Name = "Test Testsson", PhoneNumber = 123456789, City = "Viborg" });
+            pvm.PersonList.Add(new Person() { Id = 0, Name = "Test Testsson", PhoneNumber = 123456789, City = "Viborg" });
         }
 
         public List<Person> AllPeople()
         {
-            return personList;
+            return pvm.PersonList;
         }
 
         public Person EditPerson(int Id, Person person)
         {
-            foreach (Person item in personList)
+            foreach (Person item in pvm.PersonList)
             {
                 if (item.Id == Id)
                 {
@@ -38,13 +40,13 @@ namespace Mvc_Data_Assignment_Repeat.Models
 
         public List<Person> FilterList(string filter)
         {
-            List<Person> filteredList = personList.Where(x => x.Name.Contains(filter)).ToList();
-            return filteredList;
+            pvm.FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower().Contains(filter.ToLower())).ToList();
+            return pvm.FilteredList;
         }
 
         public Person FindPerson(int id)
         {
-            foreach (Person item in personList)
+            foreach (Person item in pvm.PersonList)
             {
                 if (item.Id == id)
                 {
@@ -58,19 +60,19 @@ namespace Mvc_Data_Assignment_Repeat.Models
         {
             Person newPerson = new Person() { Id = idCount, Name = person.Name, PhoneNumber = person.PhoneNumber, City = person.City, };
             idCount++;
-            personList.Add(newPerson);
-            person.personList = personList;
+            pvm.PersonList.Add(newPerson);
+            person.personList = pvm.PersonList;
             return person;
         }
 
         public List<Person> RemovePerson(int id)
         {
-            foreach (Person item in personList)
+            foreach (Person item in pvm.PersonList)
             {
                 if (item.Id == id)
                 {
-                    personList.RemoveAt(id);
-                    return personList;
+                    pvm.PersonList.RemoveAt(id);
+                    return pvm.PersonList;
                 }
             }
             return null;
@@ -78,8 +80,8 @@ namespace Mvc_Data_Assignment_Repeat.Models
 
         public List<Person> SortList()
         {
-            personList.Sort();
-            return personList;
+            pvm.PersonList.Sort();
+            return pvm.PersonList;
         }
     }
 }
