@@ -1,0 +1,77 @@
+﻿body {
+    background-color: darkslategray;
+    color: white;
+    margin-left: 100px;
+}
+
+ol {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.main-li {
+    line-height: 1.5;
+    text-align: justify;
+    min-width: 450px;
+    clear: both;
+    float: left;
+    padding: 10px;
+    border: groove 1px gray;
+    list-style: none;
+}
+
+/*.aDelete {
+    float: right;
+}*/
+
+#environment-container {
+    clear: both;
+    float: left;
+}
+
+.NoFilter {
+    float: right;
+}
+
+#buttonDelete, #button {
+    background-color: darkred;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+#buttonEdit {
+    background-color: darkgreen;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+}
+
+#AddPerson {
+    float: left;
+}
+
+#FilterList {
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#AddPerson, #FilterList {
+    border: outset 1px;
+    padding: 5px;
+    width: 172px;
+}
+
+footer {
+    background-color: darkgray;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    color: black;
+}

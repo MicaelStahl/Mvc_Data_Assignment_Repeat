@@ -1,0 +1,57 @@
+﻿@model Mvc_Data_Assignment_Repeat.Models.Person
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>index</h1>
+
+<form method="post" asp-action="Create" id="AddPerson">
+    <input type="text" name="Name" value="" placeholder="Name" />
+    <br /><br />
+    <input type="number" name="PhoneNumber" value="" placeholder="PhoneNumber" />
+    <br /><br />
+    <input type="text" name="City" value="" placeholder="City" />
+    <br /><br />
+
+    <button id="button">Create</button>
+    <br /><br /><br />
+</form>
+
+<form method="post" asp-action="Filter" id="FilterList">
+    <input type="text" name="filter" value="" placeholder="Filter by name or city" />
+    <br /><br />
+    <input type="submit" name="filter" value="Filter" id="button" />
+    <input type="submit" name="Name" value="No-Filter" class="NoFilter" id="button" />
+    <br />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>PhoneNumber</td>
+            <td>City</td>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.personList != null)
+        {
+            @foreach (Person item in Model.personList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.City</td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="Delete" class="aDelete">
+                            <input type="hidden" name="Id" value="@item.Id" id="buttonDelete" />
+                            <input type="submit" name="Id" value="Remove" id="buttonDelete" class="btn btn-danger" />
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
