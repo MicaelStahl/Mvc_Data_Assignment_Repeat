@@ -20,11 +20,12 @@ ol {
     list-style: none;
 }
 
-/*.aDelete {
-    float: right;
-}*/
-
 #environment-container {
+    clear: both;
+    float: left;
+}
+
+#filter {
     clear: both;
     float: left;
 }

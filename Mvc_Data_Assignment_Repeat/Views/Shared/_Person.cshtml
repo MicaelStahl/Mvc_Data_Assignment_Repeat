@@ -1,11 +1,15 @@
 ﻿@model Person
 
-<li class="main-li row">
+<li class="main-li row" id="@("testing" + Model.Id)">
     @Model.Id |
     @Model.Name |
     @Model.PhoneNumber |
     @Model.City |
 
+    <a asp-route-id="@Model.Id" asp-action="Edit" class="aUpdate">
+        <input type="hidden" name="Edit" value="@Model.Id" id="buttonEdit" />
+        <input type="submit" name="Edit" value="Edit" id="buttonEdit" />
+    </a>
     <a asp-route-id="@Model.Id" asp-action="Delete" class="aDelete">
         <input type="hidden" name="Id" value="@Model.Id" id="buttonDelete" />
         <input type="submit" name="Id" value="Remove" id="buttonDelete" />

@@ -72,7 +72,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
             {
                 if (item.Id == id)
                 {
-                    pvm.PersonList.RemoveAt(id);
+                    pvm.PersonList.Remove(item);
                     return pvm.PersonList;
                 }
             }

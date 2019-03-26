@@ -24,7 +24,7 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
         public IActionResult Index()
         {
             PersonViewModel pvm = new PersonViewModel();
-            
+
             string Filter = HttpContext.Session.GetString("_Filtered");
 
             if (Filter != null)
@@ -50,6 +50,26 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
 
                 }
                 _person.NewPerson(person);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            var item = _person.FindPerson(Id);
+
+            if (item == null)
+            {
+                return View();
+            }
+            return View(item);
+        }
+        [HttpPost]
+        public IActionResult Edit(int Id, Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                _person.EditPerson(Id, person);
             }
             return RedirectToAction(nameof(Index));
         }
