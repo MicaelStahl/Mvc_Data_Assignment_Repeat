@@ -9,6 +9,7 @@ namespace Mvc_Data_Assignment_Repeat.ViewModels
     public class PersonViewModel
     {
         public List<Person> PersonList = new List<Person>();
-        public List<Person> FilteredList = new List<Person>();
+
+        public string Filter { get; set; }
     }
 }

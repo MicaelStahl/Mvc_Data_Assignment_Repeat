@@ -40,8 +40,10 @@ namespace Mvc_Data_Assignment_Repeat.Models
 
         public List<Person> FilterList(string filter)
         {
-            pvm.FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower().Contains(filter.ToLower())).ToList();
-            return pvm.FilteredList;
+            var FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower()
+            .Contains(filter.ToLower())).ToList();
+
+            return FilteredList;
         }
 
         public Person FindPerson(int id)
@@ -61,7 +63,6 @@ namespace Mvc_Data_Assignment_Repeat.Models
             Person newPerson = new Person() { Id = idCount, Name = person.Name, PhoneNumber = person.PhoneNumber, City = person.City, };
             idCount++;
             pvm.PersonList.Add(newPerson);
-            person.personList = pvm.PersonList;
             return person;
         }
 

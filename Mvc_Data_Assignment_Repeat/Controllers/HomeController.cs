@@ -25,12 +25,13 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
         {
             PersonViewModel pvm = new PersonViewModel();
             
-            string filter = HttpContext.Session.GetString("_Filtered");
+            string Filter = HttpContext.Session.GetString("_Filtered");
 
-            if (filter != null)
+            if (Filter != null)
             {
                 HttpContext.Session.Remove("_Filtered");
-                pvm.PersonList = _person.FilterList(filter);
+                pvm.PersonList = _person.FilterList(Filter);
+                pvm.Filter = Filter;
             }
             else
             {
@@ -60,11 +61,11 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Filter(string filter)
+        public IActionResult Filter(string Filter)
         {
-            if (filter != null)
+            if (Filter != null)
             {
-                HttpContext.Session.SetString("_Filtered", filter);
+                HttpContext.Session.SetString("_Filtered", Filter);
             }
 
             return RedirectToAction(nameof(Index));

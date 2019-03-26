@@ -11,6 +11,5 @@ namespace Mvc_Data_Assignment_Repeat.Models
         public string Name { get; set; }
         public int? PhoneNumber { get; set; }
         public string City { get; set; }
-        public List<Person> personList { get; set; }
     }
 }

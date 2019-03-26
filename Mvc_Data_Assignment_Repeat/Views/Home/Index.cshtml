@@ -25,33 +25,17 @@
     <br />
 </form>
 
-<table>
-    <thead>
-        <tr>
-            <td>Id</td>
-            <td>Name</td>
-            <td>PhoneNumber</td>
-            <td>City</td>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.PersonList != null)
+
+@if (Model.Filter != null)
+{
+    <p>You're filtering for "@Model.Filter"!</p>
+}
+
+<div>
+    <ol>
+        @foreach (Person item in Model.PersonList)
         {
-            @foreach (Person item in Model.PersonList)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.PhoneNumber</td>
-                    <td>@item.City</td>
-                    <td>
-                        <a asp-route-id="@item.Id" asp-action="Delete" class="aDelete">
-                            <input type="hidden" name="Id" value="@item.Id" id="buttonDelete" />
-                            <input type="submit" name="Id" value="Remove" id="buttonDelete" class="btn btn-danger" />
-                        </a>
-                    </td>
-                </tr>
-            }
+            @await Html.PartialAsync("_Person", item)
         }
-    </tbody>
-</table>
+    </ol>
+</div>
