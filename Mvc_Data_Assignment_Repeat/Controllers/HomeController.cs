@@ -30,8 +30,8 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             if (Filter != null)
             {
                 HttpContext.Session.Remove("_Filtered");
-                pvm.PersonList = _person.FilterList(Filter);
                 pvm.Filter = Filter;
+                pvm.PersonList = _person.FilterList(Filter);
             }
             else
             {
@@ -74,10 +74,12 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int Id, Person person)
         {
-            _person.RemovePerson(Id);
-
+            if (ModelState.IsValid)
+            {
+                _person.RemovePerson(Id);
+            }
             return RedirectToAction(nameof(Index));
         }
 

@@ -50,20 +50,16 @@ ol {
     color: white;
 }
 
-#AddPerson {
-    float: left;
-}
-
 #FilterList {
     clear: both;
-    float: left;
     margin-bottom: 10px;
 }
 
 #AddPerson, #FilterList {
     border: outset 1px;
     padding: 5px;
-    width: 172px;
+    width: 190px;
+    float: left;
 }
 
 footer {

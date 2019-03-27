@@ -8,7 +8,6 @@ namespace Mvc_Data_Assignment_Repeat.Models
 {
     public class PeopleList : IPerson
     {
-        //public List<Person> personList = new List<Person>();
         PersonViewModel pvm = new PersonViewModel();
 
         private int idCount = 1;
@@ -38,10 +37,10 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return null;
         }
 
-        public List<Person> FilterList(string filter)
+        public List<Person> FilterList(string Filter)
         {
             var FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower()
-            .Contains(filter.ToLower())).ToList();
+            .Contains(Filter.ToLower())).ToList();
 
             return FilteredList;
         }
@@ -82,6 +81,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
         public List<Person> SortList()
         {
             pvm.PersonList.Sort();
+
             return pvm.PersonList;
         }
     }

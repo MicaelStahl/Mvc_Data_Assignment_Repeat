@@ -1,17 +1,12 @@
 ﻿@model Person
 
-<li class="main-li row" id="@("testing" + Model.Id)">
+<li class="main-li" id="@("person" + Model.Id)">
     @Model.Id |
     @Model.Name |
     @Model.PhoneNumber |
     @Model.City |
 
-    <a asp-route-id="@Model.Id" asp-action="Edit" class="aUpdate">
-        <input type="hidden" name="Edit" value="@Model.Id" id="buttonEdit" />
-        <input type="submit" name="Edit" value="Edit" id="buttonEdit" />
-    </a>
-    <a asp-route-id="@Model.Id" asp-action="Delete" class="aDelete">
-        <input type="hidden" name="Id" value="@Model.Id" id="buttonDelete" />
-        <input type="submit" name="Id" value="Remove" id="buttonDelete" />
-    </a>
+    @* This Url.Action below creates the link for AJAX and, in this case, sends it to the Id created (Ex. person2) *@
+    <button class="btn btn-success" onclick="LinkUpdate('@Url.Action("Edit", "Home", new { id = Model.Id } )' , '@("person" + Model.Id)')">Edit</button>
+    <button class="btn btn-danger" onclick="LinkUpdate('@Url.Action("Delete", "Home", new { id = Model.Id } )' , '@("person" + Model.Id)')">Delete</button>
 </li>

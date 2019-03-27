@@ -3,14 +3,13 @@
     ViewData["Title"] = "EditPerson";
 }
 
-<li class="main-li aUpdate">
-    <form class="aUpdate" method="post" asp-route-id="@Model.Id" data-target="testing">
+<li class="main-li" id="@("person" + Model.Id)">
+    <form method="post">
         @Model.Id |
-        <input type="text" name="Name" value="@Model.Name">
-        <input type="number" name="PhoneNumber" value="@Model.PhoneNumber" />
-        <input type="text" name="City" value="@Model.City" />
+        <input id="createName" type="text" name="Name" value="@Model.Name">
+        <input id="createPhoneNumber" type="number" name="PhoneNumber" value="@Model.PhoneNumber" />
+        <input id="createCity" type="text" name="City" value="@Model.City" />
 
-        <input type="hidden" name="Edit" value="@Model.Name" id="buttonEdit" />
-        <input type="submit" name="Edit" value="Update" id="buttonEdit" />
+        <button class="btn btn-success aUpdate" onclick="LinkEdit('@Url.Action("EditComplete", "Home", new { id = Model.Id } )' , '@("person" + Model.Id)', '@Model.Id')">Update</button>
     </form>
 </li>

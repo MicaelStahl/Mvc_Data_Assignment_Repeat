@@ -26,6 +26,6 @@ namespace Mvc_Data_Assignment_Repeat.Models
         List<Person> SortList();
 
         // Update (Filter)
-        List<Person> FilterList(string filter);
+        List<Person> FilterList(string Filter);
     }
 }
