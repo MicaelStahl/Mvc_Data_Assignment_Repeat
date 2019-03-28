@@ -22,8 +22,26 @@ function LinkEdit(url, target, personId) {
         },
         function (res) {
             $('#' + target).replaceWith(res);
+            var e = document.getElementById("editForm");
+            e.preventDefault();
         });
 }
+
+//$('#editForm').click(function () {
+//    e.preventDefault();
+//    $.ajax({
+//        method: "POST",
+//        url: '@Url.Action("Edit", "Home", new { id = Model.Id })',
+//        data: {
+//            Name: Model.Name,
+//            PhoneNumber: Model.PhoneNumber,
+//            City: Model.City,
+//        },
+//        success: function () {
+//            alert('success!');
+//        }
+//    });
+//});
 
 function LinkCreate(url) {
     $.post(url,

@@ -13,29 +13,10 @@
     <div>
         @RenderBody()
     </div>
-    <div>
-        @*<a class="aUpdate"
-           asp-controller="Home"
-           asp-action="PersonListPartial"
-           asp-route-id="0"
-           data-target="environment-container">Update</a>
-
-        <div id="environment-container"></div>*@
-    </div>
     <footer>
         <p>Made by: Micael Ståhl &copy; @DateTime.Now.ToString("yyyy")</p>
     </footer>
-    @*<script>
-
-            $(".aUpdate").click(function (e) {
-                e.preventDefault();
-                var _this = $(this);
-                $.get(_this.attr("href"), function (res) {
-                    $('#' + _this.data("target")).html(res);
-                });
-            });
-
-        </script>*@
     <script src="~/JS/script.js"></script>
 </body>
+
 </html>

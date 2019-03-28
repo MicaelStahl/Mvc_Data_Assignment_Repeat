@@ -1,7 +1,6 @@
 ﻿@model Mvc_Data_Assignment_Repeat.ViewModels.PersonViewModel
 @{
     ViewBag.Title = "Index";
-    Person person = new Person();
 }
 
 <h1>index</h1>
@@ -14,16 +13,16 @@
     <input type="text" name="City" value="" id="createCity" placeholder="City" />
     <br /><br />
 
-    <button class="btn btn-primary">Create</button>
+    <button id="button" class="btn btn-success">Create</button>
     <br /><br /><br />
 </form>
- @*onclick="LinkCreate('@Url.Action("Create", "Home")')"*@
+@*onclick="LinkCreate('@Url.Action("Create", "Home")')"*@
 
 <form method="post" asp-action="Filter" id="FilterList">
     <input type="text" name="filter" value="" placeholder="Filter by name or city" />
     <br /><br />
-    <input type="submit" name="filter" value="Filter" class="btn btn-primary" />
-    <input type="submit" name="Name" value="No-Filter" class="NoFilter btn btn-secondary" />
+    <input type="submit" name="filter" value="Filter" id="button" />
+    <input type="submit" name="Name" value="No-Filter" class="NoFilter" id="button" />
     <br />
 </form>
 

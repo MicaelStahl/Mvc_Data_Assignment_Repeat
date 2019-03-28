@@ -21,76 +21,92 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             _person = person;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(PersonViewModel pvm)
         {
-            PersonViewModel pvm = new PersonViewModel();
-
-            string Filter = HttpContext.Session.GetString("_Filtered");
-
-            if (Filter != null)
+            if (ModelState.IsValid)
             {
-                HttpContext.Session.Remove("_Filtered");
-                pvm.Filter = Filter;
-                pvm.PersonList = _person.FilterList(Filter);
+                pvm.Filter = HttpContext.Session.GetString("_Filtered");
+
+                if (pvm.Filter != null)
+                {
+                    HttpContext.Session.Remove("_Filtered");
+                    pvm.PersonList = _person.FilterList(pvm.Filter);
+                }
+                else
+                {
+                    pvm.PersonList = _person.AllPeople();
+                }
+                return View(pvm);
             }
-            else
-            {
-                pvm.PersonList = _person.AllPeople();
-            }
-            return View(pvm);
+            return View();
         }
 
-        public IActionResult Create(int Id, Person person)
+        public IActionResult Create(Person person)
         {
             if (ModelState.IsValid)
             {
                 if (person.Name == null || person.PhoneNumber == null || person.City == null)
                 {
-                    return RedirectToAction(nameof(Index));
-
+                    return NotFound();
                 }
                 _person.NewPerson(person);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            return PartialView("_Person", person);
         }
         [HttpGet]
-        public IActionResult Edit(int Id)
+        public IActionResult Edit(Person person)
         {
-            var item = _person.FindPerson(Id);
-
-            if (item == null)
+            if (ModelState.IsValid)
             {
+                var item = _person.FindPerson(person.Id);
+
+                if (item == null)
+                {
+                    return View();
+                }
+                return PartialView("_Edit", item);
+            }
+            return PartialView("_Person", person);
+        }
+
+        // For whenever I see this, use PARTIALVIEWS for AJAX. that's how it'll be fluid.
+
+        [HttpPost, ActionName("Edit")]
+        public IActionResult EditComplete(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _person.EditPerson(person);
+
+                return RedirectToAction(nameof(Index));
+                //return PartialView("_Person", item);
+            }
+            return PartialView("_Person", person);
+        }
+
+        public IActionResult Delete(Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                _person.RemovePerson(person.Id);
+
                 return View();
             }
-            return View(item);
+            return PartialView("_Person", person);
         }
-        [HttpPost]
-        public IActionResult Edit(int Id, Person person)
+
+        public IActionResult Filter(PersonViewModel pvm)
         {
             if (ModelState.IsValid)
             {
-                _person.EditPerson(Id, person);
+                if (pvm.Filter != null)
+                {
+                    HttpContext.Session.SetString("_Filtered", pvm.Filter);
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Delete(int Id, Person person)
-        {
-            if (ModelState.IsValid)
-            {
-                _person.RemovePerson(Id);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Filter(string Filter)
-        {
-            if (Filter != null)
-            {
-                HttpContext.Session.SetString("_Filtered", Filter);
-            }
-
-            return RedirectToAction(nameof(Index));
+            return View(pvm);
         }
     }
 }

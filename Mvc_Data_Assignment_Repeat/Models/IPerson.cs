@@ -20,7 +20,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
         List<Person> RemovePerson(int id);
 
         // Update (Edit)
-        Person EditPerson(int Id, Person person);
+        Person EditPerson(Person person);
 
         // Update (sort)
         List<Person> SortList();

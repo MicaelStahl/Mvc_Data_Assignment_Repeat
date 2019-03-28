@@ -22,11 +22,11 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return pvm.PersonList;
         }
 
-        public Person EditPerson(int Id, Person person)
+        public Person EditPerson(Person person)
         {
             foreach (Person item in pvm.PersonList)
             {
-                if (item.Id == Id)
+                if (item.Id == person.Id)
                 {
                     item.Name = person.Name;
                     item.PhoneNumber = person.PhoneNumber;
