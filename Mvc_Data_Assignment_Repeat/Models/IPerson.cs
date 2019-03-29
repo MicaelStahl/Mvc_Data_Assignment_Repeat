@@ -7,6 +7,11 @@ namespace Mvc_Data_Assignment_Repeat.Models
 {
     public interface IPerson
     {
+        /// <summary>
+        /// This interface contains all the methods and fields used in the 
+        /// Mock-Class, which in this case is the "PeopleList-class"
+        /// </summary>
+
         // Create
         Person NewPerson(Person person);
 
@@ -21,9 +26,6 @@ namespace Mvc_Data_Assignment_Repeat.Models
 
         // Update (Edit)
         Person EditPerson(Person person);
-
-        // Update (sort)
-        List<Person> SortList();
 
         // Update (Filter)
         List<Person> FilterList(string Filter);

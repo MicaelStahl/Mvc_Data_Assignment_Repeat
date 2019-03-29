@@ -1,6 +1,7 @@
 ﻿@model Mvc_Data_Assignment_Repeat.ViewModels.PersonViewModel
 
-
+@* This is the List Partial View. it requests data from another
+    Partial View for every user in the list.*@
 @foreach (Person item in Model.PersonList)
 {
     @await Html.PartialAsync("_Person", item)

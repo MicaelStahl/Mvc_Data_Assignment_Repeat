@@ -8,6 +8,12 @@ namespace Mvc_Data_Assignment_Repeat.Models
 {
     public class Person
     {
+        /// <summary>
+        /// This Model is the blueprint of a person.
+        /// The [Required] means that line is required to have a value
+        /// otherwise the ModelState will be false.
+        /// </summary>
+
         [Required]
         public int Id { get; set; }
         [Required]

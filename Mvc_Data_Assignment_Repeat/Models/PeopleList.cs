@@ -12,16 +12,25 @@ namespace Mvc_Data_Assignment_Repeat.Models
 
         private int idCount = 1;
 
+        /// <summary>
+        /// Creates a static member in the list that always shows up when the website opens anew.
+        /// </summary>
         public PeopleList()
         {
             pvm.PersonList.Add(new Person() { Id = 0, Name = "Test Testsson", PhoneNumber = 123456789, City = "Viborg" });
         }
 
+        /// <summary>
+        /// Returns all members in the list.
+        /// </summary>
         public List<Person> AllPeople()
         {
             return pvm.PersonList;
         }
 
+        /// <summary>
+        /// This method requests a person and edits it after the requested input from the user.
+        /// </summary>
         public Person EditPerson(Person person)
         {
             foreach (Person item in pvm.PersonList)
@@ -37,6 +46,9 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return null;
         }
 
+        /// <summary>
+        /// This method filters the list by using a "simple" lambda expression
+        /// </summary>
         public List<Person> FilterList(string Filter)
         {
             var FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower()
@@ -45,6 +57,9 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return FilteredList;
         }
 
+        /// <summary>
+        /// Searches for a specific person in the list by using Id.
+        /// </summary>
         public Person FindPerson(int id)
         {
             foreach (Person item in pvm.PersonList)
@@ -57,6 +72,9 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return null;
         }
 
+        /// <summary>
+        /// This creates a new person with the requested Name, PhoneNumber and City by the user.
+        /// </summary>
         public Person NewPerson(Person person)
         {
             Person newPerson = new Person() { Id = idCount, Name = person.Name, PhoneNumber = person.PhoneNumber, City = person.City, };
@@ -65,6 +83,9 @@ namespace Mvc_Data_Assignment_Repeat.Models
             return newPerson;
         }
 
+        /// <summary>
+        /// This method looks through the list of users and removes the user that has the wanted Id.
+        /// </summary>
         public List<Person> RemovePerson(int id)
         {
             foreach (Person item in pvm.PersonList)
@@ -76,13 +97,6 @@ namespace Mvc_Data_Assignment_Repeat.Models
                 }
             }
             return null;
-        }
-
-        public List<Person> SortList()
-        {
-            pvm.PersonList.Sort();
-
-            return pvm.PersonList;
         }
     }
 }

@@ -16,12 +16,16 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
 
         IPerson _person;
 
+        /// <summary>
+        /// D.I
+        /// </summary>
         public HomeController(IPerson person)
         {
             _person = person;
         }
+
         /// <summary>
-        /// The Index. This 
+        /// The Index. Always sends out the list to the website.
         /// </summary>
         public IActionResult Index()
         {
@@ -30,6 +34,10 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return View(pvm);
         }
 
+        /// <summary>
+        /// This action verifies the values aren't null nor exceeding the possible int values.
+        /// if one or several values are, then nothing will return.
+        /// </summary>
         public IActionResult Create(Person person)
         {
             if (ModelState.IsValid)
@@ -46,6 +54,9 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return Content("");
         }
 
+        /// <summary>
+        /// This action gets a specific user by using Id and then deletes it.
+        /// </summary>
         public IActionResult Delete(int? Id)
         {
             if (Id != null)
@@ -56,6 +67,9 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// This action gets a specific user by Id and then sends it out to the website.
+        /// </summary>
         [HttpGet]
         public IActionResult Edit(int? Id)
         {
@@ -73,31 +87,37 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             return View();
         }
 
-    [HttpPost]
-    public IActionResult Edit(Person person)
-    {
-        if (ModelState.IsValid)
+        /// <summary>
+        /// This action edits the values of a person after the request of the user.
+        /// </summary>
+        [HttpPost]
+        public IActionResult Edit(Person person)
         {
-            var item = _person.EditPerson(person);
-
-            return PartialView("_Person", item);
-        }
-            return Content("");
-    }
-
-    public IActionResult Filter(PersonViewModel pvm)
-    {
-        if (ModelState.IsValid)
-        {
-            if (!string.IsNullOrWhiteSpace(pvm.Filter))
+            if (ModelState.IsValid)
             {
-                pvm.PersonList = _person.FilterList(pvm.Filter);
+                var item = _person.EditPerson(person);
 
-                return PartialView("_List", pvm);
+                return PartialView("_Person", item);
             }
-            pvm.PersonList = _person.AllPeople();
+            return Content("");
         }
-        return PartialView("_List", pvm);
+
+        /// <summary>
+        /// This action filters the list after the request of the user.
+        /// </summary>
+        public IActionResult Filter(PersonViewModel pvm)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrWhiteSpace(pvm.Filter))
+                {
+                    pvm.PersonList = _person.FilterList(pvm.Filter);
+
+                    return PartialView("_List", pvm);
+                }
+                pvm.PersonList = _person.AllPeople();
+            }
+            return PartialView("_List", pvm);
+        }
     }
-}
 }
