@@ -12,9 +12,7 @@ ol {
 .main-li {
     line-height: 1.5;
     text-align: justify;
-    min-width: 450px;
-    clear: both;
-    float: left;
+    min-width: 500px;
     padding: 10px;
     border: groove 1px gray;
     list-style: none;
@@ -64,10 +62,11 @@ ol {
 
 footer {
     background-color: darkgray;
-    position: absolute;
+    text-align: center;
+    margin-top: 80px;
     left: 0;
-    bottom: 0;
-    height: 50px;
+    /*bottom: 0;*/
+    height: 40px;
     width: 100%;
     overflow: hidden;
     color: black;

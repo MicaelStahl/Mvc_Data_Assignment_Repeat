@@ -1,0 +1,7 @@
+﻿@model Mvc_Data_Assignment_Repeat.ViewModels.PersonViewModel
+
+
+@foreach (Person item in Model.PersonList)
+{
+    @await Html.PartialAsync("_Person", item)
+}

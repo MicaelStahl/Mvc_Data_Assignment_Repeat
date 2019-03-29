@@ -62,7 +62,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
             Person newPerson = new Person() { Id = idCount, Name = person.Name, PhoneNumber = person.PhoneNumber, City = person.City, };
             idCount++;
             pvm.PersonList.Add(newPerson);
-            return person;
+            return newPerson;
         }
 
         public List<Person> RemovePerson(int id)

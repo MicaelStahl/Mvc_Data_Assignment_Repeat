@@ -12,36 +12,23 @@ function LinkUpdate(url, target) {
     });
 }
 
-function LinkEdit(url, target, personId) {
-    $.post(url,
-        {
+function LinkEdit(urlPath, target, personId) {
+    $.ajax({
+        url: urlPath,
+        data: {
             Id: personId,
             Name: $('#' + target + 'Name').val(),
             PhoneNumber: $('#' + target + 'PhoneNumber').val(),
             City: $('#' + target + 'City').val()
         },
-        function (res) {
-            $('#' + target).replaceWith(res);
-            var e = document.getElementById("editForm");
-            e.preventDefault();
-        });
+        method: "POST",
+        //dataType: "text",
+        success: function (data) {
+            console.log('Ajax was successfully called');
+            $('#' + target).replaceWith(data);
+        },
+    });
 }
-
-//$('#editForm').click(function () {
-//    e.preventDefault();
-//    $.ajax({
-//        method: "POST",
-//        url: '@Url.Action("Edit", "Home", new { id = Model.Id })',
-//        data: {
-//            Name: Model.Name,
-//            PhoneNumber: Model.PhoneNumber,
-//            City: Model.City,
-//        },
-//        success: function () {
-//            alert('success!');
-//        }
-//    });
-//});
 
 function LinkCreate(url) {
     $.post(url,
@@ -51,6 +38,14 @@ function LinkCreate(url) {
             City: $('#createCity').val()
         },
         function (res) {
-            $('#allPersons').append(res);
+            $('#personList').append(res);
+        });
+}
+
+function LinkFilter(url) {
+    $.post(url,
+        { Filter: $('#filter').val() },
+        function (res) {
+            $('#personList').html(res);
         });
 }

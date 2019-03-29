@@ -4,15 +4,15 @@
 }
 
 <li class="main-li" id="@("person" + Model.Id)">
-    <form id="editForm">
+    @*<form id="editForm">*@
         @Model.Id |
-        <input id="editName" type="text" name="Name" value="@Model.Name">
-        <input id="editPhoneNumber" type="number" name="PhoneNumber" value="@Model.PhoneNumber" />
-        <input id="editCity" type="text" name="City" value="@Model.City" />
+        <input id="@("person" + Model.Id + "Name")" type="text" name="Name" value="@Model.Name">
+        <input id="@("person" + Model.Id + "PhoneNumber")" type="number" name="PhoneNumber" value="@Model.PhoneNumber" />
+        <input id="@("person" + Model.Id + "City")" type="text" name="City" value="@Model.City" />
 
-        <button onclick="LinkEdit('@Url.Action("Edit","Home",new{ id = Model.Id })','edit','@Model.Id')"
-                class="btn btn-success aUpdate">
+        <button onclick="LinkEdit('@Url.Action("Edit","Home",new{ id = Model.Id })','@("person" + Model.Id)','@Model.Id')"
+                class="btn btn-success">
             Update
         </button>
-    </form>
+    @*</form>*@
 </li>
