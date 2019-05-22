@@ -17,7 +17,20 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// </summary>
         public PeopleList()
         {
-            pvm.PersonList.Add(new Person() { Id = 0, Name = "Test Testsson", PhoneNumber = 123456789, City = "Viborg" });
+            pvm.PersonList.Add(new Person()
+            {
+                Id = 0,
+                Name = "Test Testsson",
+                PhoneNumber = 123456789,
+                City = "Viborg"
+            });
+            pvm.PersonList.Add(new Person()
+            {
+                Id= 1000,
+                Name="Testing Testare",
+                PhoneNumber= 123456789,
+                City="Vetlanda"
+            });
         }
 
         /// <summary>
