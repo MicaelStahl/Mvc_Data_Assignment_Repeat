@@ -10,7 +10,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
     {
         PersonViewModel pvm = new PersonViewModel();
 
-        private int idCount = 1;
+        private int idCount = 2;
 
         /// <summary>
         /// Creates a static member in the list that always shows up when the website opens anew.

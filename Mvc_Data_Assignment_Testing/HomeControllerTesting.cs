@@ -32,7 +32,7 @@ namespace Mvc_Data_Assignment_Testing
         public void Create_CreateNewPerson_ReturnsNewlyCreatedPerson()
         {
             var homeController = new HomeController(new PeopleList());
-            var person = new Person() { Id = 1, Name = "Micael Ståhl", PhoneNumber = 0725539574, City = "Vetlanda" };
+            var person = new Person() { Id = 2, Name = "Micael Ståhl", PhoneNumber = 0725539574, City = "Vetlanda" };
 
             var result = homeController.Create(person);
 
@@ -47,7 +47,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
             homeController.ModelState.AddModelError("SessionName", "Required");
-            var person = new Person() { City = "Vetlanda", PhoneNumber = 1235412, Id = 1 };
+            var person = new Person() { City = "Vetlanda", PhoneNumber = 1235412 };
 
             var result = homeController.Create(person);
 
@@ -61,7 +61,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
 
-            var person = new Person() { Name = "Micael Ståhl", Id = 1, PhoneNumber = 1234567, City = "Viborg" };
+            var person = new Person() { Name = "Micael Ståhl", PhoneNumber = 1234567, City = "Viborg" };
 
             var result = homeController.Create(person);
 
@@ -96,10 +96,9 @@ namespace Mvc_Data_Assignment_Testing
         [Trait("Category", "Delete")]
         public void Delete_ExistingIdPassed_ReturnsViewResult()
         {
-            var actualId = 1;
             var homeController = new HomeController(new PeopleList());
 
-            var result = homeController.Delete(actualId);
+            var result = homeController.Delete(1);
 
             Assert.IsType<ViewResult>(result);
         }
@@ -108,10 +107,9 @@ namespace Mvc_Data_Assignment_Testing
         [Trait("Category", "Delete")]
         public void Delete_ExistingIdPassed_Removes1FromList()
         {
-            var actualId = 1;
             var homeController = new HomeController(new PeopleList());
 
-            var result = homeController.Delete(actualId);
+            var result = homeController.Delete(1);
 
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsAssignableFrom<bool>(viewResult.Model);
@@ -142,7 +140,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
 
-            var result = homeController.Edit(2) as NotFoundResult;
+            var result = homeController.Edit(2);
 
             Assert.IsType<NotFoundResult>(result);
         }
@@ -151,10 +149,9 @@ namespace Mvc_Data_Assignment_Testing
         [Trait("Category", "Edit")]
         public void EditGet_NoIdPassed_ReturnsBadRequestResponse()
         {
-            int? Id = 0;
             var homeController = new HomeController(new PeopleList());
 
-            var result = homeController.Edit(Id) as BadRequestResult;
+            var result = homeController.Edit(0);
 
             Assert.IsType<BadRequestResult>(result);
         }
