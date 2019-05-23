@@ -51,18 +51,24 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
                 var item = _person.NewPerson(person);
                 return PartialView("_Person", item);
             }
-            return Content("");
+            return BadRequest(ModelState);
         }
 
         /// <summary>
-        /// This action gets a specific user by using Id and then deletes it.
+        /// This action gets a specific user by Id and then deletes it.
         /// </summary>
         public IActionResult Delete(int? Id)
         {
-            if (Id != null)
+            if (Id == null || Id == 0)
             {
-                _person.RemovePerson((int)Id);
-                return View();
+                return BadRequest();
+            }
+
+            var boolean = _person.RemovePerson((int)Id);
+
+            if (boolean)
+            {
+                return View(boolean);
             }
             return NotFound();
         }
@@ -73,18 +79,18 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
         [HttpGet]
         public IActionResult Edit(int? Id)
         {
-            if (Id != null)
+            if (Id == null || Id == 0)
             {
+                return BadRequest();
+            }
 
-                var item = _person.FindPerson((int)Id);
+            var item = _person.FindPerson((int)Id);
 
-                if (item == null)
-                {
-                    return View();
-                }
+            if (item != null)
+            {
                 return PartialView("_Edit", item);
             }
-            return View();
+            return NotFound();
         }
 
         /// <summary>
@@ -97,9 +103,13 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
             {
                 var item = _person.EditPerson(person);
 
-                return PartialView("_Person", item);
+                if (item != null)
+                {
+                    return PartialView("_Person", item);
+                }
+                return NotFound();
             }
-            return Content("");
+            return BadRequest(ModelState);
         }
 
         /// <summary>
@@ -115,9 +125,9 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
 
                     return PartialView("_List", pvm);
                 }
-                pvm.PersonList = _person.AllPeople();
+                return RedirectToAction(nameof(Index));
             }
-            return PartialView("_List", pvm);
+            return BadRequest(ModelState);
         }
     }
 }

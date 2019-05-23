@@ -22,7 +22,7 @@ namespace Mvc_Data_Assignment_Repeat.Models
         Person FindPerson(int id);
 
         // Remove
-        List<Person> RemovePerson(int id);
+        bool RemovePerson(int id);
 
         // Update (Edit)
         Person EditPerson(Person person);

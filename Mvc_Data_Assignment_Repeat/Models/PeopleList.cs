@@ -19,17 +19,17 @@ namespace Mvc_Data_Assignment_Repeat.Models
         {
             pvm.PersonList.Add(new Person()
             {
-                Id = 0,
+                Id = 1,
                 Name = "Test Testsson",
                 PhoneNumber = 123456789,
                 City = "Viborg"
             });
             pvm.PersonList.Add(new Person()
             {
-                Id= 1000,
-                Name="Testing Testare",
-                PhoneNumber= 123456789,
-                City="Vetlanda"
+                Id = 1000,
+                Name = "Testing Testare",
+                PhoneNumber = 123456789,
+                City = "Vetlanda"
             });
         }
 
@@ -46,15 +46,20 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// </summary>
         public Person EditPerson(Person person)
         {
-            foreach (Person item in pvm.PersonList)
+            if (string.IsNullOrWhiteSpace(person.Name) || string.IsNullOrWhiteSpace(person.City) || person.PhoneNumber == 0 || person.PhoneNumber == null)
             {
-                if (item.Id == person.Id)
-                {
-                    item.Name = person.Name;
-                    item.PhoneNumber = person.PhoneNumber;
-                    item.City = person.City;
-                    return item;
-                }
+                return null;
+            }
+
+            var original = pvm.PersonList.SingleOrDefault(x => x.Id == person.Id);
+
+            if (original != null)
+            {
+                original.Name = person.Name;
+                original.City = person.City;
+                original.PhoneNumber = person.PhoneNumber;
+
+                return original;
             }
             return null;
         }
@@ -99,17 +104,18 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// <summary>
         /// This method looks through the list of users and removes the user that has the wanted Id.
         /// </summary>
-        public List<Person> RemovePerson(int id)
+        public bool RemovePerson(int id)
         {
-            foreach (Person item in pvm.PersonList)
+            var person = pvm.PersonList.SingleOrDefault(x => x.Id == id);
+
+            if (person != null)
             {
-                if (item.Id == id)
-                {
-                    pvm.PersonList.Remove(item);
-                    return pvm.PersonList;
-                }
+                pvm.PersonList.Remove(person);
+
+                return true;
             }
-            return null;
+
+            return false;
         }
     }
 }
