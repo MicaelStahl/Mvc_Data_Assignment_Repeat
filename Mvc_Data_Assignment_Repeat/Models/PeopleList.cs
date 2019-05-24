@@ -21,14 +21,14 @@ namespace Mvc_Data_Assignment_Repeat.Models
             {
                 Id = 1,
                 Name = "Test Testsson",
-                PhoneNumber = 123456789,
+                PhoneNumber = "123456789",
                 City = "Viborg"
             });
             pvm.PersonList.Add(new Person()
             {
                 Id = 1000,
                 Name = "Testing Testare",
-                PhoneNumber = 123456789,
+                PhoneNumber = "123456789",
                 City = "Vetlanda"
             });
         }
@@ -46,7 +46,9 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// </summary>
         public Person EditPerson(Person person)
         {
-            if (string.IsNullOrWhiteSpace(person.Name) || string.IsNullOrWhiteSpace(person.City) || person.PhoneNumber == 0 || person.PhoneNumber == null)
+            if (string.IsNullOrWhiteSpace(person.Name) ||
+                string.IsNullOrWhiteSpace(person.City) ||
+                string.IsNullOrWhiteSpace(person.PhoneNumber))
             {
                 return null;
             }
@@ -69,22 +71,28 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// </summary>
         public List<Person> FilterList(string Filter)
         {
-            var FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower()
-            .Contains(Filter.ToLower())).ToList();
+            if (Filter != null)
+            {
+                var FilteredList = pvm.PersonList.Where(x => (x.Name + x.City).ToLower()
+                .Contains(Filter.ToLower())).ToList();
 
-            return FilteredList;
+                return FilteredList;
+            }
+            return null;
         }
 
         /// <summary>
         /// Searches for a specific person in the list by using Id.
         /// </summary>
-        public Person FindPerson(int id)
+        public Person FindPerson(int? id)
         {
-            foreach (Person item in pvm.PersonList)
+            if (id != null || id != 0)
             {
-                if (item.Id == id)
+                var person = pvm.PersonList.SingleOrDefault(x => x.Id == id);
+
+                if (person != null)
                 {
-                    return item;
+                    return person;
                 }
             }
             return null;
@@ -93,8 +101,15 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// <summary>
         /// This creates a new person with the requested Name, PhoneNumber and City by the user.
         /// </summary>
-        public Person NewPerson(Person person)
+        public Person CreatePerson(Person person)
         {
+            if (string.IsNullOrWhiteSpace(person.Name) ||
+                string.IsNullOrWhiteSpace(person.City) ||
+                string.IsNullOrWhiteSpace(person.PhoneNumber) ||
+                person.Id != 0)
+            {
+                return null;
+            }
             Person newPerson = new Person() { Id = idCount, Name = person.Name, PhoneNumber = person.PhoneNumber, City = person.City, };
             idCount++;
             pvm.PersonList.Add(newPerson);
@@ -104,17 +119,19 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// <summary>
         /// This method looks through the list of users and removes the user that has the wanted Id.
         /// </summary>
-        public bool RemovePerson(int id)
+        public bool RemovePerson(int? id)
         {
-            var person = pvm.PersonList.SingleOrDefault(x => x.Id == id);
-
-            if (person != null)
+            if (id != null || id != 0)
             {
-                pvm.PersonList.Remove(person);
+                var person = pvm.PersonList.SingleOrDefault(x => x.Id == id);
 
-                return true;
+                if (person != null)
+                {
+                    pvm.PersonList.Remove(person);
+
+                    return true;
+                }
             }
-
             return false;
         }
     }

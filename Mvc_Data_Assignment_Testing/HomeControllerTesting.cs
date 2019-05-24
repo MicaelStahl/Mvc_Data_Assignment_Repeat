@@ -32,13 +32,16 @@ namespace Mvc_Data_Assignment_Testing
         public void Create_CreateNewPerson_ReturnsNewlyCreatedPerson()
         {
             var homeController = new HomeController(new PeopleList());
-            var person = new Person() { Id = 2, Name = "Micael Ståhl", PhoneNumber = 0725539574, City = "Vetlanda" };
+            var person = new Person() { Name = "Micael Ståhl", PhoneNumber = "0725539574", City = "Vetlanda" };
 
             var result = homeController.Create(person);
 
             var viewResult = Assert.IsType<PartialViewResult>(result);
             var model = Assert.IsAssignableFrom<Person>(viewResult.ViewData.Model);
-            Assert.Equal(person.Id, model.Id);
+            Assert.Equal(2, model.Id);
+            Assert.Equal(person.Name, model.Name);
+            Assert.Equal(person.City, model.City);
+            Assert.Equal(person.PhoneNumber, model.PhoneNumber);
         }
 
         [Fact]
@@ -47,7 +50,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
             homeController.ModelState.AddModelError("SessionName", "Required");
-            var person = new Person() { City = "Vetlanda", PhoneNumber = 1235412 };
+            var person = new Person() { City = "Vetlanda", PhoneNumber = "1235412" };
 
             var result = homeController.Create(person);
 
@@ -61,7 +64,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
 
-            var person = new Person() { Name = "Micael Ståhl", PhoneNumber = 1234567, City = "Viborg" };
+            var person = new Person() { Name = "Micael Ståhl", PhoneNumber = "1234567", City = "Viborg" };
 
             var result = homeController.Create(person);
 
@@ -122,7 +125,7 @@ namespace Mvc_Data_Assignment_Testing
         public void EditGet_ExistingIdPassed_ReturnsCorrectPerson()
         {
             var homeController = new HomeController(new PeopleList());
-            var person = new Person() { Id = 1, Name = "Test Testsson", PhoneNumber = 123456789, City = "Viborg" };
+            var person = new Person() { Id = 1, Name = "Test Testsson", PhoneNumber = "123456789", City = "Viborg" };
 
             var result = homeController.Edit(1);
 
@@ -162,7 +165,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
             homeController.ModelState.AddModelError("SessionName", "Required");
-            var person = new Person() { City = "Vetlanda", PhoneNumber = 123456789, Id = 6 };
+            var person = new Person() { City = "Vetlanda", PhoneNumber = "123456789", Id = 6 };
 
             var result = homeController.Edit(person);
 
@@ -176,7 +179,7 @@ namespace Mvc_Data_Assignment_Testing
         public void EditPost_ValidModelStateNoExistingId_ReturnsNotFoundResponse()
         {
             var homeController = new HomeController(new PeopleList());
-            var person = new Person() { Id = 2, Name = "Micael Ståhle", City = "Viborg", PhoneNumber = 1237812 };
+            var person = new Person() { Id = 2, Name = "Micael Ståhle", City = "Viborg", PhoneNumber = "1237812" };
 
             var result = homeController.Edit(person);
 
@@ -189,7 +192,7 @@ namespace Mvc_Data_Assignment_Testing
         {
             var homeController = new HomeController(new PeopleList());
             // Only changed the name, so if Name is valid, so should all other be.
-            var person = new Person() { Id = 1, Name = "Testare Testsson", City = "Viborg", PhoneNumber = 12312313 };
+            var person = new Person() { Id = 1, Name = "Testare Testsson", City = "Viborg", PhoneNumber = "12312313" };
 
             var result = homeController.Edit(person);
 
@@ -210,8 +213,8 @@ namespace Mvc_Data_Assignment_Testing
                 Filter = null,
                 PersonList = new List<Person>()
                 {
-                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = 213 },
-                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= 1212 }
+                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = "213" },
+                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= "1212" }
                 }
             };
 
@@ -230,8 +233,8 @@ namespace Mvc_Data_Assignment_Testing
                 Filter = null,
                 PersonList = new List<Person>()
                 {
-                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = 213 },
-                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= 1212 }
+                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = "213" },
+                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= "1212" }
                 }
             };
 
@@ -250,8 +253,8 @@ namespace Mvc_Data_Assignment_Testing
                 Filter = "test",
                 PersonList = new List<Person>()
                 {
-                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = 213 },
-                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= 1212 }
+                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber ="213"},
+                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= "1212" }
                 }
             };
 
@@ -270,8 +273,8 @@ namespace Mvc_Data_Assignment_Testing
                 Filter = "test",
                 PersonList = new List<Person>()
                 {
-                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = 213 },
-                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= 1212 }
+                new Person() { Name = "test test", City = "test", Id = 2, PhoneNumber = "213" },
+                new Person() { Name ="test testare", City="testsson", Id=3, PhoneNumber= "1212" }
                 }
             };
 

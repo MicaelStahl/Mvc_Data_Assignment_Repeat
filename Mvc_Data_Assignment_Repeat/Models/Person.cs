@@ -14,12 +14,12 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// otherwise the ModelState will be false.
         /// </summary>
 
-        [Required]
+        [Key]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
-        public int? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [Required]
         public string City { get; set; }
     }

@@ -42,14 +42,13 @@ namespace Mvc_Data_Assignment_Repeat.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrWhiteSpace(person.Name)
-                    || person.PhoneNumber > int.MaxValue || person.PhoneNumber < int.MinValue
-                    || string.IsNullOrWhiteSpace(person.City))
+                var item = _person.CreatePerson(person);
+
+                if (item != null)
                 {
-                    return NotFound();
+                    return PartialView("_Person", item);
                 }
-                var item = _person.NewPerson(person);
-                return PartialView("_Person", item);
+                return NotFound();
             }
             return BadRequest(ModelState);
         }

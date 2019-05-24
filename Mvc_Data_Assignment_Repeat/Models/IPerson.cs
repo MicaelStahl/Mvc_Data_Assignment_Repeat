@@ -13,16 +13,16 @@ namespace Mvc_Data_Assignment_Repeat.Models
         /// </summary>
 
         // Create
-        Person NewPerson(Person person);
+        Person CreatePerson(Person person);
 
         // Read All
         List<Person> AllPeople();
 
         // Read One
-        Person FindPerson(int id);
+        Person FindPerson(int? id);
 
         // Remove
-        bool RemovePerson(int id);
+        bool RemovePerson(int? id);
 
         // Update (Edit)
         Person EditPerson(Person person);
